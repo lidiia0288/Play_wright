@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+/*import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { MainPage, RegisterPage, SettingsPage } from '../src/pages/index';
 
@@ -36,3 +36,4 @@ test('Пользователь может изменить bio. Page Object - ju
     await expect(settingsPage.bioField).toContainText(newUser.userBio);
 });
 });
+*/

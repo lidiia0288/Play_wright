@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { MainPage, RegisterPage, SettingsPage, ArticlePage } from '../src/pages/index';
+import { MainPage, RegisterPage, SettingsPage, ArticlePage, ProfilePage } from '../src/pages/index';
 
 const url = 'https://realworld.qa.guru/#/';
 let newUser;
@@ -47,11 +47,49 @@ newArticle = {
     const mainPage = new MainPage(page);        
     const articlePage = new ArticlePage(page);
 
-    await mainPage.goToSettings();
     await mainPage.goToArticle();
     await articlePage.writeArticle(newArticle.title, newArticle.about, newArticle.compose, newArticle.tags);
 
 });
+
+test('Пользователь может посмотреть популярные теги', async ({ page }) => {
+
+    const mainPage = new MainPage(page);
+
+    await mainPage.goToGlobalFeed();
+    await expect(page.getByRole('complementary').locator('div').filter({ hasText: 'Popular Tagsреклама' }).locator('div')).toBeVisible();
+
 });
 
+test('Пользователь может разлогиниться', async ({ page }) => {
 
+    const mainPage = new MainPage(page);
+    const settingsPage = new SettingsPage(page);
+
+    await mainPage.goToSettings();
+    await settingsPage.goToLogout();
+    await expect(page.getByRole('link', { name: 'Sign up' })).toBeVisible();
+
+});
+
+test('Пользователь проверить наличие подписок на других авторов', async ({ page }) => {
+
+    const mainPage = new MainPage(page);
+    const profilePage = new ProfilePage(page);
+
+    await mainPage.goToProfile();
+    await profilePage.enterFavoritedArt();
+    await expect(page.getByText((newUser.name) + ' doesn\'t have favorites.')).toBeVisible();
+
+});
+
+test('Пользователь может поменять пароль', async ({ page }) => {
+
+    const mainPage = new MainPage(page);
+    const profilePage = new ProfilePage(page);
+
+    await mainPage.goToProfile();
+    await profilePage.editProfileSettings();
+
+});
+});
