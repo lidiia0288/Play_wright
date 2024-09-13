@@ -45,7 +45,7 @@ newArticle = {
     };
 
     const mainPage = new MainPage(page);        
-    const articlePage = new ArticlePage();
+    const articlePage = new ArticlePage(page);
 
     await mainPage.goToSettings();
     await mainPage.goToArticle();
