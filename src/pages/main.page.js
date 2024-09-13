@@ -7,6 +7,9 @@ constructor (page) {
     this.settingsButton = this.page.getByRole('link', { name: 'Settings' });
     this.signupButton = this.page.getByRole('link', { name: 'Sign up' });
     this.articleButton = this.page.getByRole('link', { name: 'New Article' });
+    this.feedButton = this.page.getByRole('button', 'Global Feed');
+    this.popularTags = this.page.getByRole('heading', { name: 'Popular Tags' });
+    this.profileButton = page.getByRole('link', { name: 'Profile' });
 }
 
 async goToRegister () {
@@ -22,4 +25,15 @@ async goToSettings () {
 async goToArticle () {
     await this.articleButton.click()
 }
+
+async goToGlobalFeed() {
+    await this.feedButton.click()
+}
+
+async goToProfile () {
+    //todo Вынести меню в компонент
+    await this.menuButton.click();
+    await this.profileButton.click();
+}
+
 }
