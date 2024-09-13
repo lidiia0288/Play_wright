@@ -25,4 +25,5 @@ async writeArticle (title = '', about = '', compose = '', tags = '') {
 async publishArticle () {
     await this.publishArt.click();
 }
+
 }
