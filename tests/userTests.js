@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { MainPage, RegisterPage, SettingsPage, ArticlePage, ProfilePage } from '../src/pages/index';
+import { MainPage, RegisterPage, SettingsPage, ArticlePage, ProfilePage, LoginPage } from '../src/pages/index';
 
 const url = 'https://realworld.qa.guru/#/';
 let newUser;
@@ -49,6 +49,8 @@ newArticle = {
 
     await mainPage.goToArticle();
     await articlePage.writeArticle(newArticle.title, newArticle.about, newArticle.compose, newArticle.tags);
+    await articlePage.publishArticle();
+    await expect(page.getByText(newArticle.compose, newArticle.tags)).toBeVisible();
 
 });
 
@@ -57,7 +59,7 @@ test('Пользователь может посмотреть популярн�
     const mainPage = new MainPage(page);
 
     await mainPage.goToGlobalFeed();
-    await expect(page.getByRole('complementary').locator('div').filter({ hasText: 'Popular Tagsреклама' }).locator('div')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Popular Tags' })).toBeVisible();
 
 });
 
@@ -72,7 +74,7 @@ test('Пользователь может разлогиниться', async ({ 
 
 });
 
-test('Пользователь проверить наличие подписок на других авторов', async ({ page }) => {
+test('Новый пользователь не имеет подписок на других авторов', async ({ page }) => {
 
     const mainPage = new MainPage(page);
     const profilePage = new ProfilePage(page);
@@ -83,13 +85,20 @@ test('Пользователь проверить наличие подписо�
 
 });
 
-test('Пользователь может поменять пароль', async ({ page }) => {
+test('Пользователь может авторизоваться с новым паролем', async ({ page }) => {
 
     const mainPage = new MainPage(page);
     const profilePage = new ProfilePage(page);
+    const loginPage = new LoginPage(page);
+    const settingsPage = new SettingsPage(page);
 
     await mainPage.goToProfile();
-    await profilePage.editProfileSettings();
+    await profilePage.editProfileSettings(); //поменял пароль
+    await mainPage.goToSettings();
+    await settingsPage.goToLogout(); //разлогинился
 
+    await loginPage.linkLogin();
+    await loginPage.login(); //авторизовался
+    await expect(page.getByText(newUser.name)).toBeVisible();
 });
 });
