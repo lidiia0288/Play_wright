@@ -24,7 +24,7 @@ newUser = {
     await registerPage.register(newUser.name, newUser.email, newUser.password);
       });     
 
-test('Пользователь может изменить bio. Page Object - middle version', async ({ page }) => {
+test('Пользователь может изменить bio', async ({ page }) => {
     const mainPage = new MainPage(page);
     const settingsPage = new SettingsPage(page);
 
