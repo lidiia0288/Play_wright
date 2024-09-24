@@ -9,7 +9,7 @@ constructor (page) {
     this.articleButton = this.page.getByRole('link', { name: 'New Article' });
     this.feedButton = this.page.getByRole('button', 'Global Feed');
     this.popularTags = this.page.getByRole('heading', { name: 'Popular Tags' });
-    this.profileButton = page.getByRole('link', { name: 'Profile' });
+    this.profileButton = this.page.getByRole('link', { name: 'Profile' });
 }
 
 async goToRegister () {

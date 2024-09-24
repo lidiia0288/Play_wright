@@ -3,7 +3,7 @@ import {BasePage} from './base.page';
 export class SettingsPage extends BasePage {
 constructor (page) {
     super(page);
-    this.updateButton = page.getByRole('button','Update Settings');
+    this.updateButton = this.page.getByRole('button','Update Settings');
     this.bioField = this.page.getByPlaceholder('Short bio about you');
     this.logoutButton = this.page.getByRole('link', { name: 'Logout' });
 }

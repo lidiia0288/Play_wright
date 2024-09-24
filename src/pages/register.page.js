@@ -3,7 +3,7 @@ import {BasePage} from './base.page';
 export class RegisterPage extends BasePage {
 constructor (page) {
     super(page);
-    this.emailField = page.getByPlaceholder('Email');
+    this.emailField = this.page.getByPlaceholder('Email');
     this.passwordField = this.page.getByPlaceholder('Password');
     this.usernameField = this.page.getByPlaceholder('Your Name');
     this.signupButton = this.page.getByRole('button', { name: 'Sign up' });

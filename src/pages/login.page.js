@@ -3,10 +3,10 @@ import {BasePage} from './base.page';
 export class LoginPage extends BasePage {
 constructor (page) {
     super(page);
-    this.emailWrite = page.getByPlaceholder('Email');
+    this.emailWrite = this.page.getByPlaceholder('Email');
     this.passwordWrite = this.page.getByPlaceholder('Password');
     this.loginButton = this.page.getByRole('button', { name: 'Login' });
-    this.loginLink = page.getByRole('link', { name: 'Login' });
+    this.loginLink = this.page.getByRole('link', { name: 'Login' });
 }
 // todo нейминг
 async linkLogin () {
