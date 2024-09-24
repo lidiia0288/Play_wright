@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { userMake } from '../src/generator/user.data';
-import { articleMake } from '../src/generator/article.data';
 import { MainPage, RegisterPage, SettingsPage, ArticlePage, ProfilePage, LoginPage } from '../src/pages/index';
+import { userMake, articleMake } from '../src/generator/index';
+
 
 const url = 'https://realworld.qa.guru/#/';
 let newUser;
